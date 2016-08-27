@@ -12,7 +12,7 @@
           <div class="box-body">
             The great content goes here
           </div>
-          <!-- /.box-body -->
+        <!-- /.box-body -->
         </div>
 
       </div>

@@ -90,9 +90,11 @@ class AuthController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		//
+	public function destroy($id = false )
+	{	
+    Auth::logout();
+    sweetAlert('Logout', 'You have sign out', '', 'info');
+    return Redirect::to('login');
 	}
 
 
