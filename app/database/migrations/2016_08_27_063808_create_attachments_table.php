@@ -12,8 +12,7 @@ class CreateAttachmentsTable extends Migration {
 	 */
 	public function up()
 	{
-		if(!Schema::hasTable('attachments')){
-
+		
 			Schema::create('attachments', function(Blueprint $table)
 			{
 				$table->increments('id');
@@ -23,7 +22,7 @@ class CreateAttachmentsTable extends Migration {
 
 				$table->timestamps();
 			});	
-		}
+		
 		
 	}
 

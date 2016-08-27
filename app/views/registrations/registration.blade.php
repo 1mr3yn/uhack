@@ -6,34 +6,34 @@
      <div class="col-md-12">
         <div class="register-box">
           <div class="register-logo">
-            <a href="../../index2.html"><b>G</b>lend</a>
+            <a href="/"><b>G</b>lend</a>
           </div>
 
           <div class="register-box-body">
             <p class="login-box-msg">Register a new membership</p>
-
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                Danger alert preview. This alert is dismissable. A wonderful serenity has taken possession of my entire
-                soul, like these sweet mornings of spring which I enjoy with my whole heart.
-            </div>
-
+             
+             @include('_alerts')
 
             {{ Form::open(array('route' => 'register.store')) }} 
 
+             <div class="form-group has-feedback">
+                <span><a href="" class="pull-right"><small>View user type details</small></a></span>
+                {{ Form::select('user_type',$user_type,'', ['class'=>'form-control']) }}
+              </div>
+
+
               <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="first_name" placeholder="First Name">
+                {{ Form::text('first_name','',['class'=>'form-control', 'placeholder'=>'First Name']) }}
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
               </div>
 
                <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+                {{ Form::text('last_name','',['class'=>'form-control', 'placeholder'=>'Last Name']) }}
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
               </div>
 
               <div class="form-group has-feedback">
-                <input type="email" class="form-control" name="email" placeholder="Email">
+               {{ Form::email('email','',['class'=>'form-control', 'placeholder'=>'Email']) }}
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               </div>
 
@@ -51,7 +51,7 @@
                 <div class="col-xs-8">
                   <div class="checkbox icheck">
                     <label>
-                      &nbsp;&nbsp;&nbsp;<input type="checkbox"> I agree to the <a href="#">terms</a>
+                      &nbsp;&nbsp;&nbsp;<input type="checkbox" name="terms"> I agree to the <a href="#">terms</a>
                     </label>
                   </div>
                 </div>

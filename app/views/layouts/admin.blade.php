@@ -7,7 +7,7 @@
     @if(isset($title))
       {{ $title }} 
     @else
-      911 Companion App
+      Glend
     @endIf
   </title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -29,7 +29,7 @@
   <![endif]-->
   
 </head>
-<body class="hold-transition skin-red-light sidebar-mini sidebar-collapse">
+<body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -37,9 +37,9 @@
     <!-- Logo -->
     <a href="" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>911</b>+</span>
+      <span class="logo-mini"><b>G</b>lend</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>911+</b>Companion</span>
+      <span class="logo-lg"><b>G</b>lend</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -56,18 +56,27 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-             {{ HTML::image('/img/user2-160x160.jpg','',['class'=>"user-image"]) }}
-              <span class="hidden-xs">Admin</span>
+             {{ HTML::image('/img/user4-128x128.jpg','',['class'=>"user-image"]) }}
+              <span class="hidden-xs">{{ Auth::user()->first_name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-               {{ HTML::image('/img/user2-160x160.jpg','',['class'=>"img-circle"]) }}
+               {{ HTML::image('/img/user4-128x128.jpg','',['class'=>"img-circle"]) }}
 
                 <p>
-                 Admin
-                 
+                  {{ Auth::user()->first_name }}
                 </p>
+              </li>
+
+              <li class="user-body">
+
+              <div class="progress progress-sm">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+               </div>
+              </div>
+              <small class="text-danger">Complete your profile, to apply for loans. </small>
+
               </li>
              
               <!-- Menu Footer-->
@@ -97,25 +106,22 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-           {{ HTML::image('/img/user2-160x160.jpg','',['class'=>"img-circle"]) }}
+           {{ HTML::image('/img/user4-128x128.jpg','',['class'=>"img-circle"]) }}
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p>{{ Auth::user()->first_name }}</p>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
+    
+
+     <div class="sidebar-progress">
+       <div class="progress progress-sm">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+               </div>
+       </div>
+     </div>
+
+
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
@@ -162,10 +168,6 @@
 {{ HTML::script('/plugins/fastclick/fastclick.js') }}
 {{ HTML::script('/js/app.min.js') }}
 {{ HTML::script('/plugins/sweetalert/sweetalert.min.js') }}
-{{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js')}}
-{{ HTML::script('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js') }}
-
-
 
 
 @if ( Session::has('sweet_alert_text') )

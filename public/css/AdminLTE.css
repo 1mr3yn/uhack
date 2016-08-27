@@ -4927,7 +4927,6 @@ table.text-center th {
   }
 }
 
-#map{
-  min-height: 500px;
-  width: 100%;
+.sidebar-progress{
+  margin: 10px 10px;
 }
