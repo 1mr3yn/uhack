@@ -2,6 +2,12 @@
 
 class LenderController extends \BaseController {
 
+	public function __construct(){
+		
+		$this->beforeFilter('@checkUserAccess');
+		//parent::__construct();
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * 
@@ -85,5 +91,14 @@ class LenderController extends \BaseController {
 		//
 	}
 
+
+	//only lenders should access this page
+	public function checkUserAccess(){
+		if(Auth::user()->user_type !='lender'){
+			return Redirect::intended("dashboard");
+		}
+		//return true;
+
+	}
 
 }

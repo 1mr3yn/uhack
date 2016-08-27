@@ -12,10 +12,9 @@
           </div>
         @endif
         <?php
-          $loan = false;
-          if(!empty($id=Input::get('id'))){
-            $loan = Loan::find($id);            
-          }
+          
+          $loan = Auth::user()->loans()->first();
+          
         ?>
         @if(!empty($loan))
         <div class="info-box bg-aqua">

@@ -34,5 +34,9 @@ class Loan extends Eloquent {
     return Util::compute_loan($this->amount,$this->term);
   }
 
+  public function formatted_amount(){
+    return number_format($this->amount,2);
+  }
+
 
 }

@@ -13,7 +13,7 @@ class LoansController extends \BaseController {
 		//if the user has active loans, he cannot post any more loans
 		// unless he cancels this loan request
 
-		$has_loans = Loan::where("user_id",2)->where("status","<>",2)->get();
+		$has_loans = Loan::where("user_id",Auth::user()->id)->where("status","<>",2)->get();
 
 		if($has_loans->count() > 0){						
 			return View::make("loans.show",['the_flash'=> Session::get('the_flash')]);
@@ -48,7 +48,7 @@ class LoansController extends \BaseController {
 		}
 		//save 
 		$params = Input::all();
-		$params['user_id'] = 2;
+		$params['user_id'] = Auth::user()->id;
 		$params['status']  = 0;
 
 		$loan = Loan::create($params);
