@@ -1,0 +1,75 @@
+<?php
+
+class Util {    
+  //utility function for array_key exists
+  public static function get($needle,$haystack,$otherwise=null){    
+    
+    //if(empty($haystack)){return;} 
+    return array_key_exists($needle,(array)$haystack) ?
+      $haystack[$needle] :
+      $otherwise;
+  }
+
+  public static function commonCurlSettings(){
+    return [
+     CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "GET",
+      CURLOPT_HTTPHEADER => array(
+        "accept: application/json",
+        "content-type: application/json",
+        "x-ibm-client-id: ".Config::get("ubp.client-id"),
+        "x-ibm-client-secret: ".Config::get("ubp.client-secret")
+      )
+    ];
+  }
+
+  /**union bank api api wrappers*/
+
+  /**
+  * Provides real-time balances and other details pertinent to the account number.
+  * @return error or response
+  */
+  public static function getAccount($account_number = false){
+    if(empty($account_number)) {return false;}
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl,Util::commonCurlSettings());
+    curl_setopt_array($curl,[CURLOPT_URL => "https://api.us.apiconnect.ibmcloud.com/ubpapi-dev/sb/api/RESTs/getAccount?account_no={$account_number}"]);
+     
+    $response = curl_exec($curl);
+    $error = curl_error($curl);
+
+    curl_close($curl);
+    if(empty($error)){
+      return json_decode($response);
+    }
+    return false;
+  }
+
+  public static function transfer($transfer_data = []){
+    $curl = curl_init();
+    curl_setopt_array($curl,Util::commonCurlSettings());
+    curl_setopt_array($curl,[      
+      CURLOPT_URL => "https://api.us.apiconnect.ibmcloud.com/ubpapi-dev/sb/api/RESTs/transfer",
+      CURLOPT_CUSTOMREQUEST => "POST",  
+    ]);
+    //CURLOPT_POSTFIELDS => "{\"channel_id\":\"BLUEMIX\",\"transaction_id\":\"1234567890\",\"source_account\":\"000000020000\",\"source_currency\":\"php\",\"target_account\":\"000000020001\",\"target_currency\":\"php\",\"amount\":1500.5}"
+    
+    curl_setopt_array($curl, $settings);
+
+    $response = curl_exec($curl);
+    $error = curl_error($curl);
+
+    curl_close($curl);
+    return [
+      'response' => $response,
+      'error'    => $error
+    ];
+  }
+
+}
