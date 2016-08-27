@@ -30,6 +30,9 @@ class Loan extends Eloquent {
     ]);
     return $validate;
   }
+  public function compute(){
+    return Util::compute_loan($this->amount,$this->term);
+  }
 
 
 }
