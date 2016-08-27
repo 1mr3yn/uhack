@@ -12,7 +12,6 @@ class CreateLoansTable extends Migration {
 	 */
 	public function up()
 	{
-		if(!Schema::hasTable('loans')){
 			Schema::create('loans', function(Blueprint $table)
 			{
 				
@@ -25,7 +24,7 @@ class CreateLoansTable extends Migration {
 				$table->text('remarks');
 				$table->timestamps();
 			});	
-		}
+		
 		
 	}
 

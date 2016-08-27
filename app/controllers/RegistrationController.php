@@ -11,7 +11,14 @@ class RegistrationController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('registrations/registration');
+		$data = [
+     'user_type' => [
+        '' => 'Select User Type ',
+        'lender' => 'Lender',
+        'borrower' => 'Borrower' 
+      ],
+    ];
+    return View::make('registrations/registration')->with($data);
 	}
 
 
@@ -53,26 +60,31 @@ class RegistrationController extends \BaseController {
     Mail::send('emails.email_verification',[ 'user' => $user ], function($message) use ($user)
     {
       $message->to($user->email, $user->first_name)->subject('Verify Email');
-      
+
     });
 
     sweetAlert('Verify Email', 'Please check email for verification', '', 'success');
     return Redirect::to('register');
-      
 
 	}
 
   public function verify($token)
   {
    
-    $is_valid = User::where('hash_token',$token)->count();
+    $user = User::where('hash_token',$token)->where('status',0)->first();
    
-    if(!$is_valid){
+    if(!$user)
+    {
       sweetAlert('Invalid Token', 'Token is not valid or expired.', '', 'error');
       return Redirect::to('register');
     }
-
-   // return View::make('registrations/verify');
+    
+    $user->status = 1; //active
+    $user->hash_token = '';
+    $user->save();
+  
+    sweetAlert('Email Verified', 'Thank you for signing up.', '', 'success');
+    return Redirect::to('login');
 
   }
 

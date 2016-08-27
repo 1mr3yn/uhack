@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->boolean('status')->default(0);
+            $table->string('user_type',20);
             $table->tinyInteger('credit_score');
             $table->string('hash_token',60);
             $table->rememberToken();

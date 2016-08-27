@@ -16,6 +16,12 @@
 
             {{ Form::open(array('route' => 'register.store')) }} 
 
+             <div class="form-group has-feedback">
+                <span><a href="" class="pull-right"><small>View user type details</small></a></span>
+                {{ Form::select('user_type',$user_type,'', ['class'=>'form-control']) }}
+              </div>
+
+
               <div class="form-group has-feedback">
                 {{ Form::text('first_name','',['class'=>'form-control', 'placeholder'=>'First Name']) }}
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>

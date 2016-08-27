@@ -1,6 +1,6 @@
 <?php
 
-class AuthController extends \BaseController {
+class DashboardController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +9,7 @@ class AuthController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('login');
+		return View::make('borrower/home');
 	}
 
 
@@ -30,21 +30,8 @@ class AuthController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{ 
-  
-   $data = [
-     'email' => Input::get('email'),
-     'password' => Input::get('password'),
-     'status' => 1
-   ];
-
-   if ( Auth::attempt($data) )
-   {
-     return Redirect::to('dashboard');
-   }
-  
-   return Redirect::to('login')->withErrors(['errors'=>'Invalid User Credentials']);
-
+	{
+		//
 	}
 
 
