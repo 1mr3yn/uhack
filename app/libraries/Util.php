@@ -46,9 +46,10 @@ class Util {
   */
   public static function getAccount($account_number = false){
     if(empty($account_number)) {return false;}
-
+    if(!empty($user = Cache::get($account_number))){
+      return $user;
+    }
     $curl = curl_init();
-
     curl_setopt_array($curl,Util::commonCurlSettings());
     curl_setopt_array($curl,[CURLOPT_URL => "https://api.us.apiconnect.ibmcloud.com/ubpapi-dev/sb/api/RESTs/getAccount?account_no={$account_number}"]);
      
@@ -57,7 +58,17 @@ class Util {
 
     curl_close($curl);
     if(empty($error)){
-      return json_decode($response);
+
+
+      $user = json_decode($response); 
+      if(!empty($user[0]->account_no)){
+        //cache this user so that we don't frequently visit UBP API
+        //this cache must be cleared every time a transfer has been made 
+        //or when a payment has been made
+        Cache::forever($account_number,$user[0]);
+        return $user[0];  
+      }
+      
     }
     return false;
   }
