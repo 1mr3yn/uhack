@@ -33,7 +33,17 @@ class RegistrationController extends \BaseController {
 	{
 		$data = Input::all();
 
-    dd($data);
+    print_r($data);
+
+    $validator = User::validate($data);
+   
+    if ($validator->fails())
+    {
+      return Redirect::to('register')->withErrors($validator);
+    }
+
+    dd('pass');
+
 	}
 
 
