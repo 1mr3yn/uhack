@@ -26,13 +26,14 @@
                     <th>Amount</th>
                     <th>Term (months)</th>
                     <th>Status</th>                  
+                    <th>Date Applied</th>                  
                   </tr>
                   <?php
                   $loans = Loan::all();
                   ?>
                   @foreach($loans as $loan)
                     <tr>
-                    <td>{{  $loan->user->name() }}</td>
+                    <td>{{ $loan->user->credit_score() }}{{  $loan->user->name() }}</td>
                     <td>{{  $loan->formatted_amount() }} </td>
                     <td>{{  $loan->term }} </td>
                     <td>{{  $loan->status }}</td>                  

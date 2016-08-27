@@ -65,7 +65,7 @@ class LoansController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		
 	}
 
 

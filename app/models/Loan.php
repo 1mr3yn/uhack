@@ -21,7 +21,12 @@ class Loan extends Eloquent {
   public function user(){
     return $this->belongsTo('User');
   }
-  
+  public function lenders(){
+    return $this->hasMany('LenderLoan');
+  }
+
+
+
   public static function validate($input =[]){
     
     $validate = Validator::make($input,[
@@ -34,8 +39,8 @@ class Loan extends Eloquent {
     return Util::compute_loan($this->amount,$this->term);
   }
 
-  public function formatted_amount(){
-    return number_format($this->amount,2);
+  public function formatted_amount($user_amount = null){
+    return number_format( !empty($user_amount) ? $user_amount : $this->amount,2);
   }
 
 

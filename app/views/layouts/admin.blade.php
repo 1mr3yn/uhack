@@ -16,7 +16,7 @@
  {{ HTML::style('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css') }}
  {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css') }}
  {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css') }}
- {{ HTML::style('https://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.min.css') }}
+ {{ HTML::style('https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/ui-darkness/jquery-ui.css') }}
  {{ HTML::style('/css/AdminLTE.css') }}
  {{ HTML::style('/css/skins/_all-skins.min.css') }}
  {{ HTML::style('/plugins/sweetalert/sweetalert.css') }}
@@ -56,13 +56,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-             {{ HTML::image('/img/user4-128x128.jpg','',['class'=>"user-image"]) }}
+             {{ HTML::image('/img/user8-128x128.jpg','',['class'=>"user-image"]) }}
               <span class="hidden-xs">{{ Auth::user()->name() }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-               {{ HTML::image('/img/user4-128x128.jpg','',['class'=>"img-circle"]) }}
+               {{ HTML::image('/img/user8-128x128.jpg','',['class'=>"img-circle"]) }}
 
                 <p>
                   {{ Auth::user()->name() }}
@@ -104,11 +104,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-           {{ HTML::image('/img/user4-128x128.jpg','',['class'=>"img-circle"]) }}
+           {{ HTML::image('/img/user8-128x128.jpg','',['class'=>"img-circle"]) }}
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->name() }}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> {{ Auth::user()->user_type }}</a>
+          <a href="#"><i class="fa fa-circle text-success"></i> {{ strtoupper(Auth::user()->user_type) }}</a>
         </div>
       </div>
     
@@ -119,6 +119,29 @@
 
 
       <ul class="sidebar-menu">
+<<<<<<< HEAD
+=======
+        <li class="header">ACCOUNT DETAILS</li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+        </li>
+         <?php $account = Auth::user()->account()   ?>
+        @if(!empty($account))
+          <li><a href="#">Account number<span class="pull-right "> {{  str_repeat("x", 9).substr($account->account_name,13) }}</span></a></li>
+          <li><a href="#">Current Balance<span class="pull-right "> {{ $account->currency." ".number_format($account->current_balance ,2)}}</span></a></li>
+          <li><a href="#">Available Balance<span class="pull-right" id='available_balance'>{{ $account->currency." ".number_format($account->avaiable_balance ,2)}}</span></a></li>               
+        @endif
+
+
+
+
+
+>>>>>>> 8ed19fb1a262bb76912495e1cc7444f76246b192
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
           <a href="#">
@@ -164,6 +187,9 @@
 {{ HTML::script('/plugins/fastclick/fastclick.js') }}
 {{ HTML::script('/js/app.min.js') }}
 {{ HTML::script('/plugins/sweetalert/sweetalert.min.js') }}
+{{ HTML::script("https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js") }}
+
+
 
 
 @if ( Session::has('sweet_alert_text') )

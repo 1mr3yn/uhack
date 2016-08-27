@@ -1,4 +1,5 @@
 <?php
+
   $progress = User::progress(Auth::user());
   
 ?>

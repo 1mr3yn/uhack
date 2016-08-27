@@ -62,6 +62,7 @@ class Util {
 
       $user = json_decode($response); 
       if(!empty($user[0]->account_no)){
+        
         //cache this user so that we don't frequently visit UBP API
         //this cache must be cleared every time a transfer has been made 
         //or when a payment has been made
