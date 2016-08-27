@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', 60);
             $table->boolean('status')->default(0);
             $table->tinyInteger('credit_score');
+            $table->string('hash_token',60);
             $table->rememberToken();
             $table->timestamps();
     });
