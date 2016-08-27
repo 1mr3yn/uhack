@@ -1,9 +1,7 @@
-@extends('layouts.simple')
-@section('content')
-  <section class='content'>
+ 
     <div class='row'>
       <div class='col-md-12'>
-        <h1>Your Loan Applications</h1>
+        <h4>Your Loan Applications</h4>
         @if(!empty($the_flash = Session::get('the_flash')))
           <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -38,12 +36,8 @@
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </span>
 
-                <span class='text-muted' style='float:right' title='Lenders: 0' data-toggle="tooltip" data-placement="left" >
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i> 
+                <span class='text-muted' style='float:right' title= {{ empty($loan->lenders->count()) ? 'No loan taker' :''  }} data-toggle="tooltip" data-placement="left" >
+                  <i class="fa fa-user-times" aria-hidden="true"></i>                  
                 </span>
 
               </span>
@@ -56,5 +50,4 @@
 
       </div>
     </div>
-  </section>
-@stop
+  

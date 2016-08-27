@@ -44,7 +44,7 @@ class LoansController extends \BaseController {
 		$validation = Loan::validate(Input::only('amount','term'));
 
 		if($validation->fails()){
-			return Redirect::to(route('loans.index'))->withErrors($validation)->withInput();
+			return Redirect::to(route('dashboard.index'))->withErrors($validation)->withInput();
 		}
 		//save 
 		$params = Input::all();
@@ -53,7 +53,7 @@ class LoansController extends \BaseController {
 
 		$loan = Loan::create($params);
 		Session::flash('the_flash','Your loan application has been submitted.!');
-		return Redirect::to(route('loans.index')."?id={$loan->id}");
+		return Redirect::to(route('dashboard.index')."?id={$loan->id}");
 	}
 
 
