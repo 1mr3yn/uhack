@@ -17,3 +17,6 @@ Route::get('/', function()
 });
 
 Route::resource('register', 'RegistrationController');
+Route::get('loans/compute',['as'=>'loans.compute','uses' => 'LoansController@compute']);
+
+Route::resource('loans', 'LoansController');

@@ -7,7 +7,7 @@ class Loan extends Eloquent {
    *
    * @var string
    */
-  protected $table = 'attachments';
+  protected $table = 'loans';
 
   protected $fillable = [
     'user_id',
@@ -22,6 +22,14 @@ class Loan extends Eloquent {
     return $this->belongsTo('User');
   }
   
+  public static function validate($input =[]){
+    
+    $validate = Validator::make($input,[
+      'amount'=> "required|integer|min:20000|max:200000", 
+      'term'  => "required|integer|max:48"
+    ]);
+    return $validate;
+  }
 
 
 }
