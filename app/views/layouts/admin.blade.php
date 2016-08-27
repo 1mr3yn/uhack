@@ -73,9 +73,9 @@
 
               <div class="progress progress-sm">
                 <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                  <span class="sr-only">40% Complete (success)</span>
                </div>
               </div>
+              <small class="text-danger">Complete your profile, to apply for loans. </small>
 
               </li>
              
@@ -117,7 +117,6 @@
      <div class="sidebar-progress">
        <div class="progress progress-sm">
                 <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                  <span class="sr-only">40% Complete (success)</span>
                </div>
        </div>
      </div>
