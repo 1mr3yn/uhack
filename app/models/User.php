@@ -35,9 +35,59 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   public function attachments(){
     return $this->hasMany('Attachment'); 
   }
+
   public function loans(){
     return $this->hasMany('Loan'); 
   }
+
+  //itr, coe, goverment_id, payslip, bills_payment,
+  public function itr()
+  {
+    return $this->hasMany('Attachment')->where('file_type','itr');
+  }
+
+  public function coe()
+  {
+    return $this->hasMany('Attachment')->where('file_type','coe');
+  }
+
+  public function goverment_id()
+  {
+    return $this->hasMany('Attachment')->where('file_type','goverment_id');
+  }
+
+  public function payslip()
+  {
+    return $this->hasMany('Attachment')->where('file_type','payslip');
+  }
+
+  public function bills_payment()
+  {
+    return $this->hasMany('Attachment')->where('file_type','bills_payment');
+  }
+
+  public static function progress($user)
+  { 
+      $progress = 0;
+      $doc_types = ['itr', 'coe', 'goverment_id', 'payslip', 'bills_payment']; 
+
+      if ($user->bank_account) 
+      {
+        $progress += 50;
+      }
+      
+      foreach ($doc_types as $key) 
+      {
+        $p = $user->$key()->where('status',1)->first();
+        if($p['status']){
+          $progress += 10;
+        }
+      }
+
+     return $progress;
+
+  }
+
 
 
 	/**
@@ -48,7 +98,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password', 'remember_token');
 
 
-  public static function base64_url_encode($string) 
+  public static function cleanURL($string) 
   {
      return substr(strtr(base64_encode($string), '+/=', '-_,'), 0,59);
   }

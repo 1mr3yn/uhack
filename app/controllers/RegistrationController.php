@@ -55,7 +55,7 @@ class RegistrationController extends \BaseController {
     $user->last_name  = $data['last_name'];
     $user->email      = $data['email'];
     $user->password   = Hash::make($data['password']);
-    $user->hash_token = User::base64_url_encode(Hash::make(Carbon::now()));
+    $user->hash_token = User::cleanURL(Hash::make(Carbon::now()));
     $user->save();
 
     
