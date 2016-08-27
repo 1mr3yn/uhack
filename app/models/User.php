@@ -11,6 +11,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -28,6 +29,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     'remember_token',
     'hash_token'
   ];
+
+  public function attachments(){
+    return $this->hasMany('Attachment'); 
+  }
+  public function loans(){
+    return $this->hasMany('Loan'); 
+  }
+
 
 	/**
 	 * The attributes excluded from the model's JSON form.

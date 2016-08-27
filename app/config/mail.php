@@ -56,7 +56,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'ryanbayona@gmail.com', 'name' => 'GLend'),
+	'from' => array('address' => 'ubp.glenda@gmail.com', 'name' => 'GLend'),
 
 	/*
 	|--------------------------------------------------------------------------

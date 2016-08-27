@@ -9,7 +9,18 @@ class Util {
       $haystack[$needle] :
       $otherwise;
   }
-
+  public static function terms(){
+    return [
+      6   =>  '6 months' ,
+      12  =>  '1 year (12 months)',
+      18  =>  '1 year & 6 months (18 months)',
+      24  =>  '2 years (24 months)',
+      30  =>  '2 years & 6 months (30 months)',
+      36  =>  '3 years (36 months)',
+      42  =>  '3 years & 6 months (42 months)',
+      48  =>  '4 years (48 months)',
+    ];
+  }
   public static function commonCurlSettings(){
     return [
      CURLOPT_RETURNTRANSFER => true,
@@ -70,6 +81,38 @@ class Util {
       'response' => $response,
       'error'    => $error
     ];
+  }
+
+  public static function compute_loan($amount=20000,$terms=12,$interest_rate= 1.2){
+    return $amount / $terms + ($amount * ($interest_rate /100 ));
+  }  
+
+
+  // WARNING minimum loan amount is 500,000 so we can't really use this API!
+  public static function computeLoan($params=[]){
+    if(empty($params)) {return false;}
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl,Util::commonCurlSettings());
+    curl_setopt_array($curl, [
+      CURLOPT_URL => 
+        str_replace(
+          array_keys($params), 
+          array_values($params),
+          "https://api.us.apiconnect.ibmcloud.com/ubpapi-dev/sb/api/Loans/compute?principal=amount&interest=interest_rate&noy=terms"
+        )              
+      ]
+    );
+
+    $response = curl_exec($curl);
+    $error = curl_error($curl);
+
+    curl_close($curl);
+    if(empty($error)){
+      return json_decode($response);
+    }
+    return false;
   }
 
 }

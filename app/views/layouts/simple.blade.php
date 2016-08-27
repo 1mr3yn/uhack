@@ -84,6 +84,6 @@
         });
     </script>
 @endIf
-
+@yield('js')
 </body>
 </html>
