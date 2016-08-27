@@ -28,6 +28,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     'credit_score',
     'remember_token',
     'hash_token',
+    'bank_account',
     'user_type'
   ];
 
