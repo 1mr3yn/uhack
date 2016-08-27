@@ -12,12 +12,13 @@ class RegistrationController extends \BaseController {
 	public function index()
 	{
 		$data = [
-     'user_type' => [
-        '' => 'Select User Type ',
-        'lender' => 'Lender',
-        'borrower' => 'Borrower' 
-      ],
-    ];
+      'user_type' => [
+         '' => 'Select User Type ',
+         'lender' => 'Lender',
+         'borrower' => 'Borrower' 
+       ],
+     ];
+
     return View::make('registrations/registration')->with($data);
 	}
 
@@ -49,7 +50,7 @@ class RegistrationController extends \BaseController {
     }
   
     $user = new User();
-    $uesr->user_type  = $data['user_type'];
+    $user->user_type  = $data['user_type'];
     $user->first_name = $data['first_name'];
     $user->last_name  = $data['last_name'];
     $user->email      = $data['email'];
