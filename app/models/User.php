@@ -9,6 +9,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -24,6 +25,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     'status',
     'credit_score'
   ];
+
+  public function attachments(){
+    return $this->hasMany('Attachment'); 
+  }
+
 
 	/**
 	 * The attributes excluded from the model's JSON form.
