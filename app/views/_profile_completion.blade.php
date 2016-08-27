@@ -1,6 +1,6 @@
 <?php
   $progress = 0;
-  if ($user->bank_account){
+  if (Auth::user()->bank_account){
    $progress = 50;
   }
 ?>

@@ -101,4 +101,39 @@ class LenderController extends \BaseController {
 
 	}
 
+	public function lend(){		
+
+		$loan = Loan::find(Input::get('loan_id'));
+		$amount = Input::get('amount');
+
+		//saving 
+		LenderLoan::create([
+			'lender_id' => Auth::user()->id, 
+			'loan_id'  =>	$loan->id,	
+			'amount'		=> $amount
+		]);
+
+		//notify borrower via email
+
+		//modify cached user account available balance
+		$account = Auth::user()->account();
+		
+		if($account->avaiable_balance - $amount < 0){
+			return Response::json([
+				'success'=>false,
+				'message' => "Insufficient Balance"
+			]);
+		}
+		Cache::forever($account->account_no,$account);
+		return Response::json([
+			'success'=>true,
+			'available_balance' => "PHP ".number_format($account->avaiable_balance,2)
+		]);
+
+	}
+
+	public function backout(){
+
+	}
+
 }

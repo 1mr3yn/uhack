@@ -16,7 +16,7 @@
  {{ HTML::style('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css') }}
  {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css') }}
  {{ HTML::style('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css') }}
- {{ HTML::style('https://code.jquery.com/ui/1.11.4/themes/ui-darkness/jquery-ui.min.css') }}
+ {{ HTML::style('https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/ui-darkness/jquery-ui.css') }}
  {{ HTML::style('/css/AdminLTE.css') }}
  {{ HTML::style('/css/skins/_all-skins.min.css') }}
  {{ HTML::style('/plugins/sweetalert/sweetalert.css') }}
@@ -132,7 +132,7 @@
         @if(!empty($account))
           <li><a href="#">Account number<span class="pull-right "> {{  str_repeat("x", 9).substr($account->account_name,13) }}</span></a></li>
           <li><a href="#">Current Balance<span class="pull-right "> {{ $account->currency." ".number_format($account->current_balance ,2)}}</span></a></li>
-          <li><a href="#">Available Balance<span class="pull-right">{{ $account->currency." ".number_format($account->avaiable_balance ,2)}}</span></a></li>               
+          <li><a href="#">Available Balance<span class="pull-right" id='available_balance'>{{ $account->currency." ".number_format($account->avaiable_balance ,2)}}</span></a></li>               
         @endif
 
 
@@ -184,7 +184,7 @@
 {{ HTML::script('/plugins/fastclick/fastclick.js') }}
 {{ HTML::script('/js/app.min.js') }}
 {{ HTML::script('/plugins/sweetalert/sweetalert.min.js') }}
-{{ HTML::script('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js') }}
+{{ HTML::script("https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js") }}
 
 
 
