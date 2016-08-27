@@ -9,7 +9,10 @@ class DashboardController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('borrower/home');
+
+		//show index depending on user type
+
+		return View::make(Auth::user()->user_type."/home");
 	}
 
 
