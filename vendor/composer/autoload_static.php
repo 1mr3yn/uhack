@@ -191,6 +191,8 @@ class ComposerStaticInitee07cacac402f3d465e35715a0f0793e
     );
 
     public static $classMap = array (
+        'AlterUsersTableAddBankAccount' => __DIR__ . '/../..' . '/app/database/migrations/2016_08_27_121508_alter_users_table_add_bank_account.php',
+        'Attachment' => __DIR__ . '/../..' . '/app/models/Attachment.php',
         'AuthController' => __DIR__ . '/../..' . '/app/controllers/AuthController.php',
         'BaseController' => __DIR__ . '/../..' . '/app/controllers/BaseController.php',
         'Boris\\Boris' => __DIR__ . '/..' . '/d11wtq/boris/lib/Boris/Boris.php',
@@ -214,7 +216,8 @@ class ComposerStaticInitee07cacac402f3d465e35715a0f0793e
         'ClassPreloader\\Parser\\DirVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Parser/DirVisitor.php',
         'ClassPreloader\\Parser\\FileVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Parser/FileVisitor.php',
         'ClassPreloader\\Parser\\NodeTraverser' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
-        'CreateTokensTable' => __DIR__ . '/../..' . '/app/database/migrations/2016_08_27_092712_create_tokens_table.php',
+        'CreateAttachmentsTable' => __DIR__ . '/../..' . '/app/database/migrations/2016_08_27_063808_create_attachments_table.php',
+        'CreateLoansTable' => __DIR__ . '/../..' . '/app/database/migrations/2016_08_27_064501_create_loans_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/app/database/migrations/2016_08_27_061124_create_users_table.php',
         'Crypt_AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
         'Crypt_Base' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Base.php',
@@ -227,6 +230,7 @@ class ComposerStaticInitee07cacac402f3d465e35715a0f0793e
         'Crypt_Rijndael' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Rijndael.php',
         'Crypt_TripleDES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/TripleDES.php',
         'Crypt_Twofish' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Twofish.php',
+        'DashboardController' => __DIR__ . '/../..' . '/app/controllers/DashboardController.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/app/database/seeds/DatabaseSeeder.php',
         'File_ANSI' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/File/ANSI.php',
         'File_ASN1' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/File/ASN1.php',
@@ -609,6 +613,8 @@ class ComposerStaticInitee07cacac402f3d465e35715a0f0793e
         'Jeremeamia\\SuperClosure\\SerializableClosure' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/SerializableClosure.php',
         'Jeremeamia\\SuperClosure\\Visitor\\ClosureFinderVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/Visitor/ClosureFinderVisitor.php',
         'Jeremeamia\\SuperClosure\\Visitor\\MagicConstantVisitor' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/Visitor/MagicConstantVisitor.php',
+        'Loan' => __DIR__ . '/../..' . '/app/models/Loan.php',
+        'LoansController' => __DIR__ . '/../..' . '/app/controllers/LoansController.php',
         'Math_BigInteger' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Math/BigInteger.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',

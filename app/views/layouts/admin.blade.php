@@ -110,6 +110,7 @@
         </div>
         <div class="pull-left info">
           <p>{{ Auth::user()->first_name }}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> {{ Auth::user()->user_type }}</a>
         </div>
       </div>
     

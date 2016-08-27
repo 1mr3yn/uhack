@@ -27,7 +27,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     'status',
     'credit_score',
     'remember_token',
-    'hash_token'
+    'hash_token',
+    'user_type'
   ];
 
   public function attachments(){
