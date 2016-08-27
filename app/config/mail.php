@@ -15,6 +15,7 @@ return array(
 	|
 	*/
 
+	//'driver' => 'smtp',
 	'driver' => 'smtp',
 
 	/*
@@ -28,7 +29,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'smtp.gmail.com',	
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +56,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'ryanbayona@gmail.com', 'name' => 'GLend'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -66,6 +68,7 @@ return array(
 	| transport layer security protocol should provide great security.
 	|
 	*/
+
 
 	'encryption' => 'tls',
 
@@ -80,7 +83,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => 'ubp.glenda@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +96,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => 'r2b2/23rx93.1',
 
 	/*
 	|--------------------------------------------------------------------------
