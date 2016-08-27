@@ -79,6 +79,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     return Util::getAccount($this->bank_account);
   }
 
+  public function credit_score(){
+     return $this->credit_score;
+  }
+
 
 
 }
