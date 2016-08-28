@@ -77,24 +77,36 @@ class Util {
   public static function transfer($transfer_data = []){
     $curl = curl_init();
     curl_setopt_array($curl,Util::commonCurlSettings());
+
+    $post = array_merge([
+      'channel_id'      => 'UHACK_0038', 
+      'transaction_id'  => time(),
+      'source_account'  => '',      
+      'target_account' => '',
+      'amount'          => 0,
+      'source_currency' => 'php',
+      'target_currency' => 'php'      
+    ],$transfer_data);
+    curl_setopt_array($curl,Util::commonCurlSettings());
     curl_setopt_array($curl,[      
       CURLOPT_URL => "https://api.us.apiconnect.ibmcloud.com/ubpapi-dev/sb/api/RESTs/transfer",
       CURLOPT_CUSTOMREQUEST => "POST",  
-    ]);
-    //CURLOPT_POSTFIELDS => "{\"channel_id\":\"BLUEMIX\",\"transaction_id\":\"1234567890\",\"source_account\":\"000000020000\",\"source_currency\":\"php\",\"target_account\":\"000000020001\",\"target_currency\":\"php\",\"amount\":1500.5}"
-    
-    curl_setopt_array($curl, $settings);
+      CURLOPT_POSTFIELDS => json_encode($post)
+    ]);   
 
     $response = curl_exec($curl);
     $error = curl_error($curl);
 
     curl_close($curl);
+    //remove the cached data for this account so that we may refresh this later 
+    Cache::forget($post['source_account']);
+    Cache::forget($post['target_account']);
     return [
       'response' => $response,
       'error'    => $error
     ];
   }
-
+  //compute MA
   public static function compute_loan($amount=20000,$terms=12,$interest_rate= 1.2){
     return $amount / $terms + ($amount * ($interest_rate /100 ));
   }  

@@ -134,4 +134,13 @@ class LoansController extends \BaseController {
 
 	}
 
+	//this should be on cron
+	//for the sake of demo we'll just manually initiate it
+	//pay the lender with the monthly due
+	public function pay($loan_id){
+		Loan::find($loan_id)->pay();
+		return "Payment successfull";
+
+	}
+
 }
