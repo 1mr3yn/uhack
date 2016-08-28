@@ -8,7 +8,8 @@
       {{ $title }} 
     @else
       Glend
-    @endIf
+    @endIf 
+    - Crowd-sourced Lending
   </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -181,6 +182,7 @@
 {{ HTML::script('/plugins/fastclick/fastclick.js') }}
 {{ HTML::script('/js/app.min.js') }}
 {{ HTML::script('/plugins/sweetalert/sweetalert.min.js') }}
+{{ HTML::script("https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js") }}
 
 
 @if ( Session::has('sweet_alert_text') )

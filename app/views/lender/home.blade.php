@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.dashboard')
 @section('content')
 
   <section class="content-header">
@@ -62,22 +62,32 @@
 
                       ?>
                     <tr>
-                    <td>   {{ $loan->user->credit_score() }} {{  $loan->user->name() }}</td>
+                    <td> <span class='text-yellow'><i class="fa fa-star" aria-hidden="true"></i>
+</span>{{  $loan->user->name() }}
+
+                      
+
+                    </td>
                     <td>{{  $loan->formatted_amount($loan->lenders->count() == 0 ? null : $loan_amount)  }} </td>
                     <td class='term-col'>{{  $loan->term }}  </td>
                     <td>{{  $loan->created_at->toFormattedDateString() }}</td>                  
-                    <td>{{  $loan->status }}</td>                  
+                    <td>{{  $loan->lenders->sum('amount') == $loan->amount ? 'complete' : 'incomplete' }}</td>                  
                     <td>        
                       <?php
                         //check if this user already pledged on this loan
                         $enable_input = true;
                         $uloan =$loan->lenders()->where('loan_id',$loan->id)->where('lender_id',Auth::user()->id)->first();
-                        if(!empty($uloan->count())){                          
+
+                        if(!empty($uloan)){                          
+                          //var_dump((int)$uloan->lender_id == Auth::user()->id);
                           //do not allow them to input amount
-                          $enable_input = !$uloan->lender_id == Auth::user()->id;
+                          $enable_input = false;!$uloan->lender_id == Auth::user()->id;
+
                         }
+                        //$enable_input = empty($loan_amount) ? false : $enable_input;
+
                       ?>
-                      @if($enable_input)  
+                      @if($enable_input && !empty($loan_amount))  
                      
                       <input class="amount_spinner" 
                         data-loan_id="{{$loan->id}}" 
@@ -93,7 +103,7 @@
                       @else
 
                         <span class='text-normal text-success'>
-                          {{ $loan->formatted_amount($uloan->amount) }}
+                          {{ !empty($uloan) ? $loan->formatted_amount($uloan->amount) : ''}}
                         </span>
                       @endif
 

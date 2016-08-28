@@ -142,7 +142,8 @@ class LenderController extends \BaseController {
 
 		return Response::json([
 			'success'=>true,
-			'available_balance' => "PHP ".number_format($new_balance,2)
+			'available_balance' => "PHP ".number_format($new_balance,2),
+			'message' => 'You have successfully funded this loan'
 		]);
 
 	}
