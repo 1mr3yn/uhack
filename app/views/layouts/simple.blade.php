@@ -7,7 +7,7 @@
     @if(isset($title))
       {{ $title }} 
     @else
-      Glend
+      GLend - Crowd-sourced Lending
     @endIf
   </title>
   <!-- Tell the browser to be responsive to screen width -->

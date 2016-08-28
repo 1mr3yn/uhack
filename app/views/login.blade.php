@@ -7,7 +7,8 @@
        
        <div class="login-box">
         <div class="login-logo">
-          <a href="/"><b>G</b>lend</a>
+          <a href="/"><b class='text-yellow'>G</b><b class='text-primary'>lend</b></a><br>
+          <span class='text-success'>Crowd-sourced Lending</span>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
@@ -37,12 +38,17 @@
               <div class="col-xs-4">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
               </div>
+
               <!-- /.col -->
             </div>
           </form>
          
           <a href="#">I forgot my password</a><br>
-          <a href="{{ url('register') }}" class="text-center">Register a new membership</a>
+          <hr>
+          <div align='right'>
+            <span class='text-primary'>Not yet a member? </span>
+            <a class='btn btn-success btn-flat' href="{{ url('register') }}" class="text-center">Register</a>
+          </div>
 
         </div>
         <!-- /.login-box-body -->
