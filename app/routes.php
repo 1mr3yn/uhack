@@ -6,7 +6,7 @@ Route::get('/', function()
   if(Auth::user()){
     return Redirect::to("/dashboard");
   }
-  return View::make('home');
+  return Redirect::to("/login");
 });
 Route::get('flush', function()
 {
