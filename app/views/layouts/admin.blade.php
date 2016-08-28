@@ -20,6 +20,7 @@
  {{ HTML::style('/css/AdminLTE.css') }}
  {{ HTML::style('/css/skins/_all-skins.min.css') }}
  {{ HTML::style('/plugins/sweetalert/sweetalert.css') }}
+ {{ HTML::style('/plugins/fancybox/jquery.fancybox.css') }}
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -146,6 +147,7 @@
 {{ HTML::script('/js/app.min.js') }}
 {{ HTML::script('/plugins/sweetalert/sweetalert.min.js') }}
 {{ HTML::script("https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js") }}
+{{ HTML::script("/plugins/fancybox/jquery.fancybox.pack.js") }}
 
 
 
@@ -166,6 +168,7 @@
 
 $(function() {
    
+   $('.fancy-box').fancybox();
   $('.document-approved').click(function(e) { 
     e.preventDefault();
     var id = $(this).data('file-id')

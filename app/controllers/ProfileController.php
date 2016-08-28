@@ -46,7 +46,7 @@ class ProfileController extends \BaseController {
       if ( Input::hasFile($key) ) 
       {
         $file = Input::file($key);
-        $filename = str_random(60).'.jgp'; 
+        $filename = str_random(60).'.jpg'; 
         $upload = $file->move($destinationPath, $filename);
 
          if($upload) 

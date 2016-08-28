@@ -15,12 +15,13 @@
                       @if( !count($user->itr) )
                       @else
                         @if( $user->itr[0]->status == 'pending' )
-                        <a href="#" class="view-document"><i class="fa fa-eye"></i> view</a>
+                         
+                        <a href="{{ $user->itr[0]->file_path}}" class="view-document fancy-box"><i class="fa fa-eye"></i> view </a>
                         &nbsp;&nbsp;
                         <button class="btn btn-primary btn-sm document-approved" data-file-id="{{$user->itr[0]->id}}"> Approved </button>
                         <button class="btn btn-warning btn-sm document-declined" data-file-id="{{$user->itr[0]->id}}"> Declined </button>
                         @else
-                         <span class="label label-warning"> {{$user->itr[0]->status}} </span>
+                         <span class="label label-success"> {{$user->itr[0]->status}} </span>
                        @endIf
                       @endIf
 
@@ -34,7 +35,7 @@
                         
                       @else
                         @if( $user->coe[0]->status == 'pending' )
-                        <a href="#" class="view-document"><i class="fa fa-eye"></i> view</a>
+                         <a href="{{ $user->coe[0]->file_path}}" class="view-document fancy-box"><i class="fa fa-eye"></i> view </a>
                         &nbsp;&nbsp;
                         <button class="btn btn-primary btn-sm document-approved" data-file-id="{{$user->coe[0]->id}}"> Approved </button>
                         <button class="btn btn-warning btn-sm document-declined"  data-file-id="{{$user->coe[0]->id}}"> Declined </button>
@@ -52,7 +53,7 @@
                         
                       @else
                        @if( $user->goverment_id[0]->status == 'pending' )
-                        <a href="#" class="view-document"><i class="fa fa-eye" ></i> view</a>
+                        <a href="{{ $user->goverment_id[0]->file_path }}" class="view-document fancy-box"><i class="fa fa-eye" ></i> view</a>
                         &nbsp;&nbsp;
                         <button class="btn btn-primary btn-sm document-approved" data-file-id="{{$user->goverment_id[0]->id}}"> Approved </button>
                         <button class="btn btn-warning btn-sm document-declined"  data-file-id="{{$user->goverment_id[0]->id}}"> Declined </button>
@@ -70,7 +71,7 @@
                         
                       @else
                        @if( $user->payslip[0]->status == 'pending' )
-                        <a href="#" class="view-document"><i class="fa fa-eye"></i> view</a>
+                        <a href="{{ $user->payslip[0]->file_path }}" class="view-document fancy-box"><i class="fa fa-eye fancy-box"></i> view</a>
                         &nbsp;&nbsp;
                         <button class="btn btn-primary btn-sm document-approved" data-file-id="{{$user->payslip[0]->id}}"> Approved </button>
                         <button class="btn btn-warning btn-sm document-declined"  data-file-id="{{$user->payslip[0]->id}}"> Declined </button>
@@ -88,7 +89,7 @@
                         
                       @else
                       @if( $user->bills_payment[0]->status == 'pending' )
-                        <a href="#" class="view-document"><i class="fa fa-eye"></i> view</a>
+                        <a href="{{ $user->bills_payment[0]->file_path }}" class="view-document fancy-box"><i class="fa fa-eye"></i> view</a>
                         &nbsp;&nbsp;
                         <button class="btn btn-primary btn-sm document-approved" data-file-id="{{$user->bills_payment[0]->id}}"> Approved </button>
                         <button class="btn btn-warning btn-sm document-declined"  data-file-id="{{$user->bills_payment[0]->id}}"> Declined </button>
