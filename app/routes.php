@@ -3,7 +3,10 @@
 
 Route::get('/', function()
 {
-  return View::make('home');
+  if(Auth::user()){
+    return Redirect::to("/dashboard");
+  }
+  return Redirect::to("/login");
 });
 Route::get('flush', function()
 {
@@ -15,13 +18,15 @@ Route::get('register/{token}/verify', [ 'as'=> 'register.verify', 'uses' => 'Reg
 Route::resource('register', 'RegistrationController');
 Route::resource('login','AuthController');
 
-
+Route::get('loans/pay/{loan_id}',['as'=>'loans.pay','uses' => 'LoansController@pay']);
 
 Route::group(array('before' => 'auth'), function()
 {
    if(isset($_GET['logmein'])){
       Session::flush();
       Auth::login(User::find($_GET['logmein']));  
+      //return Redirect::to("/dashhoard");
+      
     }
 
   Route::resource('dashboard','DashboardController');
@@ -47,7 +52,7 @@ Route::get('seed',function(){
   for($i=1;$i<=5;$i++){
     User::create([
       'last_name'   =>  "Snow {$i}",
-      'first_name'  =>  "John {$i}",
+      'first_name'  =>  "Jon B",
       'email'       =>  "ryanbayona+{$i}@gmail.com",      
       'hash_token'  =>    User::cleanURL(Hash::make(date("y-m-d H:i:s"))),
       'password'    => Hash::make("r2b2/23"),    
@@ -61,7 +66,7 @@ Route::get('seed',function(){
   for($i=16;$i<=20;$i++){
     User::create([
       'last_name'   =>  "Snow {$i}",
-      'first_name'  =>  "John {$i}",
+      'first_name'  =>  "John L",
       'email'       =>  "ryanbayona+{$i}@gmail.com",
       'hash_token'  =>    User::cleanURL(Hash::make(date("y-m-d H:i:s"))),
       'password'    => Hash::make("r2b2/23"),    

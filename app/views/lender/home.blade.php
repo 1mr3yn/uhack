@@ -1,7 +1,17 @@
 @extends('layouts.admin')
 @section('content')
 
-
+  <section class="content-header">
+  <h1>
+    Lender's page
+    <small> loans that need funding...</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Lender's page</a></li>
+    
+  </ol>
+</section>
 <section class='content'>
   <div class='row'>
     <div class='col-md-12'>
@@ -58,7 +68,16 @@
                     <td>{{  $loan->created_at->toFormattedDateString() }}</td>                  
                     <td>{{  $loan->status }}</td>                  
                     <td>        
-
+                      <?php
+                        //check if this user already pledged on this loan
+                        $enable_input = true;
+                        $uloan =$loan->lenders()->where('loan_id',$loan->id)->where('lender_id',Auth::user()->id)->first();
+                        if(!empty($uloan->count())){                          
+                          //do not allow them to input amount
+                          $enable_input = !$uloan->lender_id == Auth::user()->id;
+                        }
+                      ?>
+                      @if($enable_input)  
                      
                       <input class="amount_spinner" 
                         data-loan_id="{{$loan->id}}" 
@@ -69,16 +88,31 @@
                         data-min='0' 
                       ><br/>
                       <span class='text-normal text-muted' style='font-weight:normal;font-size:x-small;'>
-                        max: {{ $loan->formatted_amount($loan_amount)}}
+                        PHP {{ $loan->formatted_amount($loan_amount)}}
                       </span>
+                      @else
+
+                        <span class='text-normal text-success'>
+                          {{ $loan->formatted_amount($uloan->amount) }}
+                        </span>
+                      @endif
 
                     </td>
                     <td>
+                      @if($enable_input)
                       <span class='text-primary' id="earnings-{{$loan->id}}">  
                       </span>
+                      @else
+                        <span class='text-success' > 
+                        {{ $loan->formatted_amount($loan->compute_earning($uloan->amount)) }}
+                        </span>
+                      @endif
                     </td>
                     <td>
-                      <button class='btn btn-xs btn-default hidden picker'>pick</button>
+                      
+                       <button class='btn btn-xs btn-default hidden picker'>pick</button>
+                      
+
                     </td>
                     
                   </tr>

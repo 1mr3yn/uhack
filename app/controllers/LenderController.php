@@ -106,6 +106,8 @@ class LenderController extends \BaseController {
 		$loan = Loan::find(Input::get('loan_id'));
 		$amount = Input::get('amount');
 
+		$account = Auth::user()->account();
+		
 		//saving 
 		LenderLoan::create([
 			'lender_id' => Auth::user()->id, 
@@ -117,17 +119,30 @@ class LenderController extends \BaseController {
 
 		//modify cached user account available balance
 		$account = Auth::user()->account();
-		
-		if($account->avaiable_balance - $amount < 0){
+		$new_balance = $account->avaiable_balance - $amount;
+		if( $new_balance < 0){
 			return Response::json([
 				'success'=>false,
 				'message' => "Insufficient Balance"
 			]);
 		}
+
+		$account->avaiable_balance = $new_balance;
 		Cache::forever($account->account_no,$account);
+
+		//check if the total pledged amount is now equal to the loan amount
+		if($loan->lenders->sum('amount') == $loan->amount){
+			//notify all lenders that the loan will start and that their accounts will be debited
+
+			//initiate transfer
+			$loan->start();
+
+		}
+
+
 		return Response::json([
 			'success'=>true,
-			'available_balance' => "PHP ".number_format($account->avaiable_balance,2)
+			'available_balance' => "PHP ".number_format($new_balance,2)
 		]);
 
 	}

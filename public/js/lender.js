@@ -14,9 +14,11 @@ $(document).ready(function(){
         target.html("");
 
         var button = $(s.data('target')).parents('tr').find("button");
+
         button.toggleClass('hidden',true);
         if(ui.value > 0 && ui.value <= s.data('max')) {
           var add_on = ui.value * (1.2 / 100);
+          
           var num = (((ui.value / s.data('term')) + add_on ) * s.data('term') ) - ui.value; 
           target.html(num.toLocaleString());
           button.toggleClass('hidden',false);
