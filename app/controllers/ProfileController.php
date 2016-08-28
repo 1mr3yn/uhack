@@ -37,6 +37,8 @@ class ProfileController extends \BaseController {
     $doc_types = ['itr', 'coe', 'goverment_id', 'payslip', 'bills_payment']; 
     $upload_count = 0; 
     $destinationPath =  public_path().'/documents/'.Auth::user()->id; 
+    $file_path = '/documents/'.Auth::user()->id;
+
 
     foreach ($doc_types as $key)
     {
@@ -53,7 +55,7 @@ class ProfileController extends \BaseController {
            $docs = new Attachment();
            $docs->user_id = $user;
            $docs->file_type = $key;
-           $docs->file_path = $destinationPath.'/'.$filename;
+           $docs->file_path = $file_path.'/'.$filename;
            $docs->save();
          }
 

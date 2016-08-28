@@ -11,30 +11,62 @@
 
     <!-- Main content -->
     <section class="content">
+      <div class="row">  
+      
+       <div class="col-xs-12">
+          <div class="box box-warning">
+            <div class="box-header">
+              <h3 class="box-title">Users</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tbody>
+                 <tr>
+                  <th>#</th>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Type</th>
+                  <th>Profile Completion</th>
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
+                </tr>
+                
+                <?php $i=1; ?>
+                @foreach($users as $user)
+                 <tr>
+                   <td>{{$i++}}</td>
+                   <td><a href="{{ route('user.show',$user->id) }}"> {{ $user->name() }} </a></td>
+                   <td>{{ $user->email }} </td>
+                   <td> 
+                    @if($user->status)
+                     <span class="label label-success">Approved</span>
+                    @else
+                     <span class="label label-warning">Pending</span>
+                    @endIf
+                   </td>
+                   <td> 
+                    <span class="{{ $user->user_type == 'borrower' ? 'label label-info' : 'label label-primary' }} ">{{$user->user_type}}</span> 
+                   </td>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+                   <td>
+                     <div class="progress progress-xs">
+                      <div class="progress-bar progress-bar-yellow" style="width: 50%"></div>
+                    </div>
+                   </td>
+                </tr>
+                @endForeach
+               
+               
+              </tbody>
+            </table>
+            </div>
+            <!-- /.box-body -->
           </div>
+          <!-- /.box -->
         </div>
-        <div class="box-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
+       
       </div>
-      <!-- /.box -->
-
     </section>
     <!-- /.content -->
 

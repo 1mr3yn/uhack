@@ -89,6 +89,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
   }
 
 
+
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
@@ -130,6 +131,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
   public function credit_score(){
      return $this->credit_score;
+  }
+
+  public function document($value,$array)
+  {
+     //return index / false 
+   $search = array_search($value, array_column($array, 'file_type'));
+  
+   if( $search === false )
+   {
+     return null;
+   }
+
+   return $search;
+
   }
 
 

@@ -1,20 +1,10 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 @section('content')
- 
- <section class="content-header">
-      <h1>
-         User Profile
-        <small>You must complete all the required details to apply for loans</small>
-      </h1>
-      <p>
-        @include('_alerts')
-      </p>
-</section>
-
-<section class="content">
- <div class="row">
-
-   <div class="col-md-4">
+  
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">  
+        <div class="col-md-4">
       <div class="box box-primary">
         <div class="box-body box-profile">
           
@@ -22,7 +12,7 @@
 
           <h3 class="profile-username text-center">{{ $user->first_name }}, {{ $user->last_name }}</h3>
           <p class="text-muted text-center"><i class="fa fa-circle text-success"></i> {{ $user->user_type }}</p>
-          <p> @include('_profile_completion') </p>
+         
          
           <ul class="list-group list-group-unbordered">
            
@@ -101,37 +91,30 @@
             <div class="box-header with-border">
               <h3 class="box-title">Unionbank Account Number</h3>
             </div>
-           
             <div class="box-body">
              @if(!$user->bank_account) 
-               {{ Form::open( array('route' => 'profile.verifyBankAccount','class'=>'form-horizontal') ) }} 
-               {{ Form::hidden('user_id', $user->id ) }}
-                  <div class="form-group">
-                    <div class="col-sm-8 control-label">{{ Form::text('bank_account','',['class'=>'form-control']) }}</div>
-                    <div class="col-sm-4">
-                      <button type="submit" class="btn btn-danger"><i class="fa fa-lock"></i> Verify</button>
-                    </div>
-                  </div>
-                {{ Form::close() }}
-              @else
-                 <div class="form-group">
-                      <label for="inputName" class="col-sm-8 control-label text-success">
-                       {{ $user->bank_account }} <i class="fa fa-check fa-lg"></i> <i> ( Verified / Active )</i>
+                <div class="form-group">
+                      <label for="inputName" class="col-sm-8 control-label text-info">
+                        <i class="fa fa-warning fa-lg"></i> <i>Not Verified / Inactive</i>
                       </label>
-                      @include('_profile_bank_details')
                   </div>
+              @else
+               <div class="form-group">
+                    <label for="inputName" class="col-sm-8 control-label text-success">
+                     {{ $user->bank_account }} <i class="fa fa-check fa-lg"></i> <i> ( Verified / Active )</i>
+                    </label>
+                     @include('_profile_bank_details')
+                </div>
               @endIf
 
             </div>
           </div>
-
+           
            @include('_profile_document_details')
 
-      
+
       </div>
-
-    </div> 
-</section>
-
+    </section>
+    <!-- /.content -->
 
 @stop

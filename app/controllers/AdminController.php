@@ -1,6 +1,7 @@
 <?php
 
-class DashboardController extends \BaseController {
+use Carbon\Carbon;
+class AdminController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,16 +10,35 @@ class DashboardController extends \BaseController {
 	 */
 	public function index()
 	{
-    if(Auth::user()->user_type=='admin')
-    {
-      return Redirect::to('admin');
-    }
-
-		//show index depending on user type
-    return View::make(Auth::user()->user_type."/home");
-
+		$data = [
+     'users' => User::where('user_type','!=','admin')->get(),
+    ];
+    return View::make('admin/home')->with($data);
 	}
 
+  public function attachment()
+  {
+
+    $data = Input::all();
+    $doc = Attachment::find($data['id']);
+    $doc->status = $data['action'];
+    $doc->approved_at = Carbon::now();
+    $doc->approved_by = Auth::user()->id;
+    $doc->note = $data['note'];
+    $doc->save();
+
+    // if($doc->status)
+    // {
+    //   sweetAlert('Approved!', 'User document approved', '', 'success');
+    // }else{
+    //   sweetAlert('Declined!', 'Documend has been declined', '', 'info');
+    // }
+
+    return $doc;
+
+    
+
+  }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -28,7 +48,7 @@ class DashboardController extends \BaseController {
 	public function create()
 	{
 		//
-	}
+	}  
 
 
 	/**

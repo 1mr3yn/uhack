@@ -32,6 +32,10 @@ Route::group(array('before' => 'auth'), function()
   Route::post('lender/lend', [ 'as'=> 'lender.lend', 'uses' => 'LenderController@lend'] );
   Route::resource('lender', 'LenderController');
   Route::get('logout', [ 'as'=> 'logout', 'uses' => 'AuthController@destroy' ] );
+  
+  Route::post('admin/attachment', [ 'as'=> 'admin.attachment', 'uses' => 'AdminController@attachment'] );
+  Route::resource('admin', 'AdminController');
+  Route::resource('user', 'UserController');
 
 
 });
@@ -45,7 +49,7 @@ Route::get('seed',function(){
       'last_name'   =>  "Snow {$i}",
       'first_name'  =>  "John {$i}",
       'email'       =>  "ryanbayona+{$i}@gmail.com",      
-      'hash_token'  =>    User::base64_url_encode(Hash::make(date("y-m-d H:i:s"))),
+      'hash_token'  =>    User::cleanURL(Hash::make(date("y-m-d H:i:s"))),
       'password'    => Hash::make("r2b2/23"),    
       'status'      =>  1,
       'user_type'   =>  "borrower",
@@ -59,7 +63,7 @@ Route::get('seed',function(){
       'last_name'   =>  "Snow {$i}",
       'first_name'  =>  "John {$i}",
       'email'       =>  "ryanbayona+{$i}@gmail.com",
-      'hash_token'  =>    User::base64_url_encode(Hash::make(date("y-m-d H:i:s"))),
+      'hash_token'  =>    User::cleanURL(Hash::make(date("y-m-d H:i:s"))),
       'password'    => Hash::make("r2b2/23"),    
       'status'      =>  1,
       'user_type'   =>  "lender",

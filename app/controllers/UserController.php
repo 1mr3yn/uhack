@@ -1,6 +1,6 @@
 <?php
 
-class DashboardController extends \BaseController {
+class UserController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,14 +9,7 @@ class DashboardController extends \BaseController {
 	 */
 	public function index()
 	{
-    if(Auth::user()->user_type=='admin')
-    {
-      return Redirect::to('admin');
-    }
-
-		//show index depending on user type
-    return View::make(Auth::user()->user_type."/home");
-
+		//
 	}
 
 
@@ -50,7 +43,12 @@ class DashboardController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$data = [
+      'user' => User::with('itr', 'coe', 'goverment_id', 'payslip', 'bills_payment')->find($id),
+    ];
+
+    return View::make('admin/show_user')->with($data);
+
 	}
 
 
