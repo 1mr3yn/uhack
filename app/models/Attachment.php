@@ -11,12 +11,29 @@ class Attachment extends Eloquent {
 
   protected $fillable = [
     'user_id',
+    'file_type', //itr, coe, goverment_id, payslip, bills_payment, 
     'file_path',
-    'file_path'
+    'status', // 0 = pending, -1 = declined, 1 = approved
+    'approved_at', 
+    'approved_by',
+    'note'
+
   ];
+
 
   public function user(){
     return $this->belongsTo('User');
+  }
+
+  public function getStatusAttribute($value)
+  {
+    $status = [
+     '0'  => 'pending',
+     '-1' => 'declined',
+     '1'  => 'approved'
+    ];
+   
+    return $status[$value];
   }
   
 

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 class ProfileController extends \BaseController {
 
 	/**
@@ -31,7 +32,44 @@ class ProfileController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+	  $user = Auth::user()->id;
+    $data = Input::all();
+    $doc_types = ['itr', 'coe', 'goverment_id', 'payslip', 'bills_payment']; 
+    $upload_count = 0; 
+    $destinationPath =  public_path().'/documents/'.Auth::user()->id; 
+
+    foreach ($doc_types as $key)
+    {
+     
+      if ( Input::hasFile($key) ) 
+      {
+        $file = Input::file($key);
+        $filename = str_random(60).'.jgp'; 
+        $upload = $file->move($destinationPath, $filename);
+
+         if($upload) 
+         {
+           $upload_count = 1;
+           $docs = new Attachment();
+           $docs->user_id = $user;
+           $docs->file_type = $key;
+           $docs->file_path = $destinationPath.'/'.$filename;
+           $docs->save();
+         }
+
+      }
+
+    }
+
+    if (!$upload_count)
+    {
+      return Redirect::route('profile.show',$user)->withErrors(['errors'=>'Cannot Upload File(s)']);
+    }
+
+    sweetAlert('Uploaded', 'File(s) Uploaded', '', 'success');
+    return Redirect::route('profile.show',$user);
+   
+  
 	}
 
   public function verifyBankAccount()
@@ -40,7 +78,7 @@ class ProfileController extends \BaseController {
     $id = $data['user_id'];
     
     $validator = Validator::make($data,[
-           'bank_account' => 'required|digits_between:10,16'
+           'bank_account' => 'required|digits_between:10,16|unique:users'
     ]);
 
     if ($validator->fails() )
@@ -62,7 +100,6 @@ class ProfileController extends \BaseController {
     sweetAlert('Verified', 'Bank Account Verified', '', 'success');
     return Redirect::route('profile.show',$id);
 
-
   }
 
 	/**
@@ -74,7 +111,7 @@ class ProfileController extends \BaseController {
 	public function show($id)
 	{
 		$data = [
-     'user' => User::find($id),
+     'user' => User::with('itr','coe', 'goverment_id', 'payslip','bills_payment')->find($id),
     ];
 
     return View::make('users.profile')->with($data);

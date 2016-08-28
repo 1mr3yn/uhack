@@ -1,8 +1,7 @@
 <?php
-  $progress = 0;
-  if (Auth::user()->bank_account){
-   $progress = 50;
-  }
+
+  $progress = User::progress(Auth::user());
+  
 ?>
  <div class="progress progress-sm">
     <div  
