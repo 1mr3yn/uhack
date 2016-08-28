@@ -51,7 +51,7 @@
 
                    <td>
                      <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-yellow" style="width: 50%"></div>
+                      <div class="progress-bar progress-bar-yellow" style="width: {{ User::progress($user)}}%"></div>
                     </div>
                    </td>
                 </tr>
